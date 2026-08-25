@@ -11,7 +11,7 @@
         size: 'xl'
       }, {
         label: 'Use this template',
-        to: 'https://github.com/nuxt-ui-templates/starter',
+        to: 'https://github.com/JeMaNd-r/printer_frontend',
         target: '_blank',
         icon: 'i-simple-icons-github',
         size: 'xl',
