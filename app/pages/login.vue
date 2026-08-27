@@ -34,22 +34,39 @@ const providers = [{
 
 const schema = z.object({
   email: z.email('Invalid email'),
-  password: z.string('Password is required').min(8, 'Must be at least 8 characters')
+  password: z.string('Password is required')
 })
 
 type Schema = z.output<typeof schema>
 
+
+async function getCsrfToken() {
+  await $fetch('http://localhost:8000/api-auth/csrf/', {
+        credentials: 'include'
+      })
+
+  const csrfToken = useCookie('csrftoken')
+  return csrfToken
+}
+
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
   try {
-    await $fetch('localhost:8000/api/auth', {
+    const csrfToken = await getCsrfToken()
+
+    await $fetch('http://localhost:8000/api-auth/login/', {
       method: 'POST',
-      body: schema,
+      credentials: 'include',
+      headers: {
+        'X-CSRFToken': csrfToken.value ?? ''
+      },
+      body: payload.data,
     })
 
     // Refresh the session on client-side and redirect to the home page
     await refreshSession()
-    await navigateTo('/api/auth')
-  } catch {
+    await navigateTo('/dashboard')
+  } catch (error) {
+    console.error(error)
     alert('Bad credentials')
   }
 }
