@@ -1,16 +1,15 @@
 <template>
   <div>
     <UPageHero
-      title="Nuxt Starter Template"
-      description="A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours."
+      title="3D Printer Dashboard"
+      description="A dedicated Nuxt web application for monitoring the 3D printer, exploring its history and managing print projects."
       :links="[{
-        label: 'Get started',
-        to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-        target: '_blank',
+        label: 'Login',
+        to: '/login',
         trailingIcon: 'i-lucide-arrow-right',
         size: 'xl'
       }, {
-        label: 'Use this template',
+        label: 'Explore the underlying code',
         to: 'https://github.com/JeMaNd-r/printer_frontend',
         target: '_blank',
         icon: 'i-simple-icons-github',
@@ -22,49 +21,76 @@
 
     <UPageSection
       id="features"
-      title="Everything you need to build modern Nuxt apps"
-      description="Start with a solid foundation. This template includes all the essentials for building production-ready applications with Nuxt UI's powerful component system."
+      title="Available features"
       :features="[{
         icon: 'i-lucide-rocket',
-        title: 'Production-ready from day one',
-        description: 'Pre-configured with TypeScript, ESLint, Tailwind CSS, and all the best practices. Focus on building features, not setting up tooling.'
+        title: 'Dashboard',
+        description: 'Printer dashboard with current printer and detailed status'
       }, {
-        icon: 'i-lucide-palette',
-        title: 'Beautiful by default',
-        description: 'Leveraging Nuxt UI\'s design system with automatic dark mode, consistent spacing, and polished components that look great out of the box.'
+        icon: 'i-lucide-thermometer',
+        title: 'Temperature',
+        description: 'Temperature monitoring for nozzle, print bed, and chamber'
+      }, {
+        icon: 'i-lucide-lightbulb',
+        title: 'Light',
+        description: 'Printer light status and control'
       }, {
         icon: 'i-lucide-zap',
-        title: 'Lightning fast',
-        description: 'Optimized for performance with SSR/SSG support, automatic code splitting, and edge-ready deployment. Your users will love the speed.'
+        title: 'Refresh',
+        description: 'Automatic data refresh'
+      }, {
+        icon: 'i-lucide-file-chart-column-increasing',
+        title: 'Stats',
+        description: 'Printer statistics with recorded states and timestamps'
+      }, {
+        icon: 'i-lucide-chart-line',
+        title: 'Charts',
+        description: 'Interactive charts of printer and temperature data over time'
+      }, {
+        icon: 'i-lucide-chart-column',
+        title: 'State details',
+        description: 'Detailed printer-state views for individual measurements'
       }, {
         icon: 'i-lucide-blocks',
-        title: '100+ components included',
-        description: 'Access Nuxt UI\'s comprehensive component library. From forms to navigation, everything is accessible, responsive, and customizable.'
+        title: 'Project overview',
+        description: 'Project overview grouped by printing status'
+      }, {
+        icon: 'i-lucide-file',
+        title: 'Project details',
+        description: 'Project details including project name, owner, creation date, and print image'
       }, {
         icon: 'i-lucide-code-2',
-        title: 'Developer experience first',
-        description: 'Auto-imports, hot module replacement, and TypeScript support. Write less boilerplate and ship more features.'
+        title: 'Nuxt, Vue, TypeScript',
+        description: 'Fast, component-based interface built with Nuxt, Vue and TypeScript'
       }, {
-        icon: 'i-lucide-shield-check',
-        title: 'Built for scale',
-        description: 'Enterprise-ready architecture with proper error handling, SEO optimization, and security best practices built-in.'
+        icon: 'i-lucide-zap',
+        title: 'REST API',
+        description: 'REST API Integration that communicates with the Django backend through its API'
+      }, {
+        icon: 'i-lucide-smartphone',
+        title: 'Responsive design',
+        description: 'Responsive design foor desktop and mobile devices'
       }]"
-    />
+    >
+      <template #description>
+        The application provides an overview of the printer's current status, including temperatures, print progress, and other relevant printer information. 
+        It communicates with the <a href="https://github.com/JeMaNd-r/printer_dashboard" style="text-decoration: underline;">project's backend API</a> to retrieve and display printer data.
+      </template>
+    </UPageSection>
 
     <UPageSection>
       <UPageCTA
-        title="Ready to build your next Nuxt app?"
-        description="Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today."
+        title="Ready to explore the printer data?"
+        description="Log in to access the available data provided by the API."
         variant="subtle"
         :links="[{
-          label: 'Start building',
-          to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-          target: '_blank',
+          label: 'Login',
+          to: '/login',
           trailingIcon: 'i-lucide-arrow-right',
           color: 'neutral'
         }, {
-          label: 'View on GitHub',
-          to: 'https://github.com/nuxt-ui-templates/starter',
+          label: 'Check out the Backend',
+          to: 'https://github.com/JeMaNd-r/printer_dashboard',
           target: '_blank',
           icon: 'i-simple-icons-github',
           color: 'neutral',
