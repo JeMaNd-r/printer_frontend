@@ -2,7 +2,7 @@
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
-const { loggedIn, user, fetch: refreshSession } = useUserSession()
+const { fetchUser } = useDjangoAuth()
 
 const toast = useToast()
 
@@ -40,34 +40,37 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 
-async function getCsrfToken() {
-  await $fetch('http://localhost:8000/api-auth/csrf/', {
-        credentials: 'include'
-      })
-
-  const csrfToken = useCookie('csrftoken')
-  return csrfToken
-}
-
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
   try {
-    const csrfToken = await getCsrfToken()
-
-    await $fetch('http://localhost:8000/api-auth/login/', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'X-CSRFToken': csrfToken.value ?? ''
+    const csrf = await $fetch<{ csrfToken: string }>(
+      "http://localhost:8000/api-auth/csrf/",
+      {
+        credentials: "include",
       },
-      body: payload.data,
+    )
+
+    await $fetch("http://localhost:8000/api-auth/login/", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "X-CSRFToken": csrf.csrfToken,
+      },
+      body: {
+        username: payload.data.email,
+        password: payload.data.password
+      }
     })
 
-    // Refresh the session on client-side and redirect to the home page
-    await refreshSession()
-    await navigateTo('/dashboard')
-  } catch (error) {
-    console.error(error)
-    alert('Bad credentials')
+    await fetchUser()
+
+    await navigateTo('/')
+
+  } catch (error: any) {
+    console.error('Login failed:', {
+      status: error?.response?.status,
+      data: error?.data,
+      message: error?.message
+    })
   }
 }
 </script>

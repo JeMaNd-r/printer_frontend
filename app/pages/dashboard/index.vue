@@ -3,17 +3,17 @@ definePageMeta({
   middleware: ['authenticated'],
 })
 
-const { user, clear: clearSession } = useUserSession()
+const { user, logout: logoutFromDjango } = useDjangoAuth()
 
 async function logout () {
-  await clearSession()
+  await logoutFromDjango()
   await navigateTo('/login')
 }
 </script>
 
 <template>
-    <div>
-        <h1>Welcome {{ user?.name }}</h1>
+    <div v-if="user">
+        <h1>Welcome {{ user.name }}</h1>
         <button @click="logout">
             Logout
         </button>
