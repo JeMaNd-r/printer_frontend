@@ -30,8 +30,8 @@ const items = ref<NavigationMenuItem[]>([
   {
     label: 'Home',
     icon: 'i-lucide-house',
-    to: '/',
-  }, 
+    to: '/'
+  },
   {
     label: 'Printer dashboard',
     icon: 'i-lucide-blocks',
@@ -57,7 +57,7 @@ const items = ref<NavigationMenuItem[]>([
   {
     label: 'Login',
     icon: 'i-lucide-user',
-    to: '/login',
+    to: '/login'
   }
 ])
 </script>
@@ -73,7 +73,12 @@ const items = ref<NavigationMenuItem[]>([
           <AppLogo class="w-auto h-6 shrink-0" />
         </NuxtLink>
 
-        <UNavigationMenu orientation="horizontal" content-orientation="vertical" :items="items" class="w-full justify-center" />
+        <UNavigationMenu
+          orientation="horizontal"
+          content-orientation="vertical"
+          :items="items"
+          class="w-full justify-center"
+        />
       </template>
 
       <template #right>
