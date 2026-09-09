@@ -73,8 +73,14 @@
       }]"
     >
       <template #description>
-        The application provides an overview of the printer's current status, including temperatures, print progress, and other relevant printer information. 
-        It communicates with the <a href="https://github.com/JeMaNd-r/printer_dashboard" style="text-decoration: underline;">project's backend API</a> to retrieve and display printer data.
+        The application provides an overview of the printer's current status, including temperatures, print progress, and other relevant printer information.
+        It communicates with the
+        <a
+          href="https://github.com/JeMaNd-r/printer_dashboard"
+          style="text-decoration: underline;"
+        >
+          project's backend API
+        </a> to retrieve and display printer data.
       </template>
     </UPageSection>
 

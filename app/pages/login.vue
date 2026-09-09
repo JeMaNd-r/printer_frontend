@@ -39,21 +39,21 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
-
+// Login submission handler
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
   try {
     const csrf = await $fetch<{ csrfToken: string }>(
-      "http://localhost:8000/api-auth/csrf/",
+      'http://localhost:8000/api-auth/csrf/',
       {
-        credentials: "include",
-      },
+        credentials: 'include'
+      }
     )
 
-    await $fetch("http://localhost:8000/api-auth/login/", {
-      method: "POST",
-      credentials: "include",
+    await $fetch('http://localhost:8000/api-auth/login/', {
+      method: 'POST',
+      credentials: 'include',
       headers: {
-        "X-CSRFToken": csrf.csrfToken,
+        'X-CSRFToken': csrf.csrfToken
       },
       body: {
         username: payload.data.email,
@@ -62,15 +62,14 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     })
 
     await fetchUser()
-
     await navigateTo('/')
-
-  } catch (error: any) {
-    console.error('Login failed:', {
-      status: error?.response?.status,
-      data: error?.data,
-      message: error?.message
-    })
+  } catch (error: unknown) {
+    const status =
+    typeof error === 'object' &&
+    error !== null &&
+    'response' in error
+      ? (error.response as { status?: number })?.status
+      : undefined
   }
 }
 </script>
@@ -91,4 +90,3 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     </UPageCard>
   </div>
 </template>
-
