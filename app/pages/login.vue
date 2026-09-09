@@ -63,13 +63,10 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
 
     await fetchUser()
     await navigateTo('/')
-  } catch (error: unknown) {
-    const status =
-    typeof error === 'object' &&
-    error !== null &&
-    'response' in error
-      ? (error.response as { status?: number })?.status
-      : undefined
+  } catch (error) {
+    return {
+      status: (error as { response?: { status?: number } }).response?.status
+    }
   }
 }
 </script>
