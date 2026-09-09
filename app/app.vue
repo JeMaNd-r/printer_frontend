@@ -1,4 +1,6 @@
-<script setup>
+<script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -22,6 +24,42 @@ useSeoMeta({
   ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
   twitterCard: 'summary_large_image'
 })
+
+// navigation bar
+const items = ref<NavigationMenuItem[]>([
+  {
+    label: 'Home',
+    icon: 'i-lucide-house',
+    to: '/',
+  }, 
+  {
+    label: 'Printer dashboard',
+    icon: 'i-lucide-blocks',
+    to: '/dashboard',
+    children: [
+      {
+        label: 'Home',
+        icon: 'i-lucide-house',
+        to: '/dashboard'
+      },
+      {
+        label: 'Projects',
+        icon: 'i-lucide-book-open',
+        to: '/dashboard/projects'
+      },
+      {
+        label: 'Printer stats',
+        icon: 'i-lucide-file-chart-line',
+        to: '/dashboard/stats'
+      }
+    ]
+  },
+  {
+    label: 'Login',
+    icon: 'i-lucide-user',
+    to: '/login',
+  }
+])
 </script>
 
 <template>
@@ -35,7 +73,7 @@ useSeoMeta({
           <AppLogo class="w-auto h-6 shrink-0" />
         </NuxtLink>
 
-        <TemplateMenu />
+        <UNavigationMenu orientation="horizontal" content-orientation="vertical" :items="items" class="w-full justify-center" />
       </template>
 
       <template #right>

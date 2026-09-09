@@ -4,8 +4,8 @@
       title="3D Printer Dashboard"
       description="A dedicated Nuxt web application for monitoring the 3D printer, exploring its history and managing print projects."
       :links="[{
-        label: 'Login',
-        to: '/login',
+        label: 'View the dashboard',
+        to: '/dashboard',
         trailingIcon: 'i-lucide-arrow-right',
         size: 'xl'
       }, {
