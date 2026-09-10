@@ -70,7 +70,7 @@ const items = ref<NavigationMenuItem[]>([
           to="/"
           class="focus-visible:outline-3 outline-primary/25 rounded-md p-1 -ms-1"
         >
-          <AppLogo class="w-auto h-6 shrink-0" />
+          <h1>3DASHBOARD</h1>
         </NuxtLink>
 
         <UNavigationMenu
