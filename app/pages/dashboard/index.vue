@@ -13,9 +13,28 @@ async function logout() {
 
 <template>
   <div v-if="user">
-    <h1>Welcome {{ user.name }}</h1>
-    <button @click="logout">
+    <UPageHero
+      title="Welcome to the Dashboard"
+      description="View the latest printer stats and manage the printing projects."
+      :links="[{
+        label: 'Stats',
+        to: '/dashboard/stats',
+        trailingIcon: 'i-lucide-file-chart-line',
+        size: 'xl',
+        color: 'neutral',
+        variant: 'subtle'
+      }, {
+        label: 'Projects',
+        to: '/dashboard/projects',
+        target: '_blank',
+        trailingIcon: 'i-lucide-book-open',
+        size: 'xl',
+        color: 'neutral',
+        variant: 'subtle'
+      }]"
+    />
+    <UButton color="warning" icon="i-lucide-log-out" @click="logout">
       Logout
-    </button>
+    </UButton>
   </div>
 </template>
