@@ -49,7 +49,7 @@ const printer_states = ref<PrinterState[]>([])
 
 if (project.value?.printer_states?.length) {
   printer_states.value = await Promise.all(
-    project.value.printer_states.map((stateUrl) =>
+    project.value.printer_states.map(stateUrl =>
       $fetch<PrinterState>(stateUrl, {
         credentials: 'include',
         query: {
@@ -61,20 +61,20 @@ if (project.value?.printer_states?.length) {
 }
 
 const stateArray: Record<number, string> = {
-  0: "Idle",
-  10: "Preparing",
-  20: "Running",
-  30: "Paused",
-  40: "Finished",
-  50: "Unknown",
-  60: "Failed"
+  0: 'Idle',
+  10: 'Preparing',
+  20: 'Running',
+  30: 'Paused',
+  40: 'Finished',
+  50: 'Unknown',
+  60: 'Failed'
 }
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-semibold tracking-tight">
-      Project {{ project.id }}
+      Project
     </h2>
     <UCard
       v-if="project"
@@ -83,7 +83,7 @@ const stateArray: Record<number, string> = {
     >
       <template #header>
         <h3 class="font-semibold">
-          {{ project.project_name }}
+          ID {{project.id}}: {{ project.project_name }}
         </h3>
       </template>
       <p>
@@ -123,7 +123,7 @@ const stateArray: Record<number, string> = {
               hour: 'numeric',
               minute: '2-digit'
             })"
-            :avatar="{ 
+            :avatar="{
               icon: state.is_light_on ? 'i-lucide-lightbulb' : 'i-lucide-lightbulb-off',
               alt: state.is_light_on.toString()
             }"

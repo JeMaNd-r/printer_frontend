@@ -5,21 +5,21 @@ definePageMeta({
 
 // Retrieve projects from the backend API
 interface Project {
+  id: number
+  url: string
+  project_name: string
+  project_description: string
+  created_at: string
+  updated_at: string
+  is_created_manually: boolean
+  owner: {
     id: number
-    url: string
-    project_name: string
-    project_description: string
-    created_at: string
-    updated_at: string
-    is_created_manually: boolean
-    owner: {
-      id: number
-      email: string
-      first_name: string
-      last_name: string
-      is_superuser: boolean
-    }
-    printer_states: [string]
+    email: string
+    first_name: string
+    last_name: string
+    is_superuser: boolean
+  }
+  printer_states: [string]
 }
 
 interface PaginatedResponse<T> {
@@ -53,7 +53,7 @@ const total = computed(() => {
       Printing Projects
     </h2>
     <p class="text">
-      List of printing projects that have been sent to the 3D printer. Each project has a unique ID and a name. 
+      List of printing projects that have been sent to the 3D printer. Each project has a unique ID and a name.
       You can view the details of each project by clicking on the project card.
     </p>
     <br>
@@ -74,8 +74,12 @@ const total = computed(() => {
       :total="total"
     />
     <br>
-    <UButton icon="i-lucide-arrow-left" to:="/dashboard/stats" variant="subtle">
+    <UButton
+      icon="i-lucide-arrow-left"
+      to:="/dashboard/stats"
+      variant="subtle"
+    >
       Stats
-    </UButton> <1-- TODO: Add logout functionality --></1-->
+    </UButton> <!-- TODO: Add logout functionality -->
   </div>
 </template>

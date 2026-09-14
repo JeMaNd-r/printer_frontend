@@ -33,7 +33,11 @@ async function logout() {
         variant: 'subtle'
       }]"
     />
-    <UButton color="warning" icon="i-lucide-log-out" @click="logout">
+    <UButton
+      color="warning"
+      icon="i-lucide-log-out"
+      @click="logout"
+    >
       Logout
     </UButton>
   </div>
