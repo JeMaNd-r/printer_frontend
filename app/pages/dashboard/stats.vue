@@ -50,38 +50,70 @@ const stateArray: Record<number, string> = {
   60: "Failed"
 }
 
+const getProjectIdFromUrl = (projectUrl: string | null): number | string => {
+  if (!projectUrl) {
+    return "unknown"
+  }
+
+  const match = projectUrl.match(/\/(\d+)\/?$/)
+  if (match?.[1]) {
+    return Number(match[1])
+  }
+
+  try {
+    return Number(new URL(projectUrl).pathname.match(/\/(\d+)\/?$/)?.[1] ?? '') || "unknown"
+  } catch {
+    return "unknown"
+  }
+}
+
 const timelineItems = computed(() =>
   printer_states.value?.results.map(state => ({
-    value: state.id,
-    title: stateArray[state.state] + ' | ' + (state.detailed_state ?? ''),
-    date: new Date(state.created_at).toLocaleString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit'
-    }),
-    description: `${state.percentage !== null ? `${state.percentage}%` : 'Progress unknown'} of Project ${
-      new URL(state.project ?? 'none').pathname.match(/\/(\d+)\/?$/)?.[1] ?? 'unknown'
-    }`,
-    icon: state.is_light_on ? 'i-lucide-lightbulb' : 'i-lucide-lightbulb-off'
+      value: state.id,
+      title: stateArray[state.state] + ' | ' + (state.detailed_state ?? ''),
+      date: new Date(state.created_at).toLocaleString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }),
+    description: `${state.percentage !== null ? `${state.percentage}%` : 'Progress unknown'}`,
+    icon: state.is_light_on ? 'i-lucide-lightbulb' : 'i-lucide-lightbulb-off',
+    projectLink: getProjectIdFromUrl(state.project)
   })) ?? []
 )
 </script>
 
 <template>
   <div>
-    <h2>
+    <h2 class="text-2xl font-semibold tracking-tight">
       3D Printer Stats
     </h2>
-    <p>
+    <p class="text">
       Here are the past printer states from the 3D printer. Select a page to view more states. 
       The states are displayed in a timeline format, showing the state, date, and progress of each print job.
     </p>
     <br>
     <UTimeline 
       :items="timelineItems"
-    />
+      :ui="{
+        date: 'float-end ms-1'
+      }"
+    >
+      <template #description="{ item }">
+        <div class="flex items-center gap-2">
+          <span>{{ item.description }}</span>
+          <NuxtLink
+            v-if="item.projectLink"
+            :to="`project_${item.projectLink}`"
+            class="font-medium text-primary underline"
+          > 
+            > Project {{ item.projectLink }}
+          </NuxtLink>
+        </div>
+      </template>
+    </UTimeline>
     <br>
     <UPagination
       v-model:page="page"
