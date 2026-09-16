@@ -20,6 +20,14 @@ interface Project {
     is_superuser: boolean
   }
   printer_states: [string]
+  last_printer_state: {
+    id: number
+    state: number
+    detailed_state: number | null
+    detailed_state_label: string | null
+    created_at: string
+    percentage: number | null
+  }
 }
 
 interface PaginatedResponse<T> {
@@ -64,7 +72,7 @@ const total = computed(() => {
         variant="subtle"
         class="w-full"
         :title="`${project.project_name} (${project.id})`"
-        :description="project.project_description"
+        :description="`[${project.last_printer_state?.detailed_state_label ?? 'Unknown'}] ${project.project_description}`"
         :to="`/dashboard/project_${project.id}`"
       />
     </UPageGrid>

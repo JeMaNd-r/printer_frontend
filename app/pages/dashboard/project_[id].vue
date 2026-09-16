@@ -28,6 +28,7 @@ interface PrinterState {
   url: string
   state: number
   detailed_state: number | null
+  detailed_state_label: string | null
   created_at: string
   is_light_on: boolean
   percentage: number | null
@@ -111,7 +112,7 @@ const stateArray: Record<number, string> = {
       <UPageCard
         v-for="state in printer_states"
         :key="state.id"
-        :title="stateArray[state.state] + ' | ' + (state.detailed_state ?? 'Unknown')"
+        :title="stateArray[state.state] + ' | ' + (state.detailed_state_label ?? 'Unknown')"
         :description="`Progress: ${state.percentage !== null ? `${state.percentage}%` : 'unknown'}`"
       >
         <template #footer>
@@ -128,6 +129,7 @@ const stateArray: Record<number, string> = {
               alt: state.is_light_on.toString()
             }"
           />
+          <!-- TODO: Add detailed_state_label in description -->
         </template>
       </UPageCard>
     </UPageList>

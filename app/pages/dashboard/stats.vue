@@ -9,6 +9,7 @@ interface Printer_State {
   url: string
   state: number
   detailed_state: number | null
+  detailed_state_label: string | null
   created_at: string
   is_light_on: boolean
   percentage: number | null
@@ -70,7 +71,7 @@ const getProjectIdFromUrl = (projectUrl: string | null): number | string => {
 const timelineItems = computed(() =>
   printer_states.value?.results.map(state => ({
     value: state.id,
-    title: stateArray[state.state] + ' | ' + (state.detailed_state ?? ''),
+    title: stateArray[state.state] + ' | ' + (state.detailed_state_label ?? 'Unknown'),
     date: new Date(state.created_at).toLocaleString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -101,6 +102,14 @@ const timelineItems = computed(() =>
         date: 'float-end ms-1'
       }"
     >
+      <template #title="{ item }">
+        <NuxtLink
+          :to="`/dashboard/state_${item.value}`"
+          class="font-medium"
+        >
+          {{ item.title }}
+        </NuxtLink>
+      </template>
       <template #description="{ item }">
         <div class="flex items-center gap-2">
           <span>{{ item.description }}</span>
