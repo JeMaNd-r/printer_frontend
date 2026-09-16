@@ -48,7 +48,7 @@ const total = computed(() => {
 </script>
 
 <template>
-  <div>
+  <UContainer>
     <h2 class="text-2xl font-semibold tracking-tight">
       Printing Projects
     </h2>
@@ -81,5 +81,5 @@ const total = computed(() => {
     >
       Stats
     </UButton> <!-- TODO: Add logout functionality -->
-  </div>
+  </UContainer>
 </template>

@@ -86,7 +86,7 @@ const timelineItems = computed(() =>
 </script>
 
 <template>
-  <div>
+  <UContainer>
     <h2 class="text-2xl font-semibold tracking-tight">
       3D Printer Stats
     </h2>
@@ -119,5 +119,5 @@ const timelineItems = computed(() =>
       v-model:page="page"
       :total="total"
     />
-  </div>
+  </UContainer>
 </template>

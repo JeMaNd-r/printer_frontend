@@ -72,7 +72,7 @@ const stateArray: Record<number, string> = {
 </script>
 
 <template>
-  <div>
+  <UContainer>
     <h2 class="text-2xl font-semibold tracking-tight">
       Project
     </h2>
@@ -134,5 +134,5 @@ const stateArray: Record<number, string> = {
     <p v-else>
       No printer states available.
     </p>
-  </div>
+  </UContainer>
 </template>

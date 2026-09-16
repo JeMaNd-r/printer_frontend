@@ -12,7 +12,7 @@ async function logout() {
 </script>
 
 <template>
-  <div v-if="user">
+  <UContainer v-if="user">
     <UPageHero
       title="Welcome to the Dashboard"
       description="View the latest printer stats and manage the printing projects."
@@ -40,5 +40,5 @@ async function logout() {
     >
       Logout
     </UButton>
-  </div>
+  </UContainer>
 </template>
