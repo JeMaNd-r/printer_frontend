@@ -65,12 +65,12 @@ const stateArray: Record<number, string> = {
     </h2>
     <UCard
       v-if=" printer_state"
-        :title="stateArray[printer_state.state] + ' | ' + (printer_state.detailed_state_label ?? 'Unknown')"
-        :description="`Progress: ${printer_state.percentage !== null ? `${printer_state.percentage}%` : 'unknown'}`"
+      :title="stateArray[printer_state.state] + ' | ' + (printer_state.detailed_state_label ?? 'Unknown')"
+      :description="`Progress: ${printer_state.percentage !== null ? `${printer_state.percentage}%` : 'unknown'}`"
     >
       <template #description>
-        <div class="flex items-center gap-2">          
-          <span>Progress: {{printer_state.percentage !== null ? printer_state.percentage + '%' : 'unknown'}} </span>
+        <div class="flex items-center gap-2">
+          <span>Progress: {{ printer_state.percentage !== null ? printer_state.percentage + '%' : 'unknown' }} </span>
           <NuxtLink
             v-if="projectId"
             :to="`project_${projectId}`"
@@ -81,19 +81,19 @@ const stateArray: Record<number, string> = {
         </div>
       </template>
       <template #footer>
-          <UUser
+        <UUser
           :name="new Date(printer_state.created_at).toLocaleString('en-GB', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-              hour: 'numeric',
-              minute: '2-digit'
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
           })"
           :avatar="{
-              icon: printer_state.is_light_on ? 'i-lucide-lightbulb' : 'i-lucide-lightbulb-off',
-              alt: printer_state.is_light_on.toString()
+            icon: printer_state.is_light_on ? 'i-lucide-lightbulb' : 'i-lucide-lightbulb-off',
+            alt: printer_state.is_light_on.toString()
           }"
-          />
+        />
       </template>
     </UCard>
     <p v-else>

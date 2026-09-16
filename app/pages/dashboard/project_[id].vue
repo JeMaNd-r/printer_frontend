@@ -84,7 +84,7 @@ const stateArray: Record<number, string> = {
     >
       <template #header>
         <h3 class="font-semibold">
-          ID {{project.id}}: {{ project.project_name }}
+          ID {{ project.id }}: {{ project.project_name }}
         </h3>
       </template>
       <p>
