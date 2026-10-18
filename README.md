@@ -7,7 +7,7 @@ Dedicated Nuxt web application for monitoring the printer, exploring its history
 The application provides an overview of the printer's current status, including temperatures, print progress, and other relevant printer information. It communicates with the [project's backend API](https://github.com/JeMaNd-r/printer_dashboard) to retrieve and display printer data.
 
 
-## Features
+## Features (planned)
 
 - 🖨️ Printer dashboard with current printer and detailed status
 - 🌡️ Temperature monitoring for nozzle, print bed, and chamber
